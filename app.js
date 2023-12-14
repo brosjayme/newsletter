@@ -30,6 +30,21 @@ app.post("/", function (req, res) {
   };
 
   const jsonData = JSON.stringify(data);
+  const url = "https://us21.api.mailchimp.com/3.0/lists/id----id";
+
+  const options = {
+    method: "POST",
+    auth: "okoro:6b48785c45f19ee13cbe06b3d411bbd2-us21",
+  };
+
+  https.request(url, options, function (respone) {
+    respone.on("data", function (data) {
+      console.log(JSON.parse(data));
+    });
+  });
+
+  request.write(jsonData);
+  request.end();
 });
 
 app.listen(3000, function (req, res) {
